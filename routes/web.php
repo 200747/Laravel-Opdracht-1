@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
+use App\Models\Post;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,10 @@ use App\Http\Controllers\Frontend\PostController;
 
 Route::get('/', [HomeController:: class, 'index']);
 Route::get('/post', [PostController:: class, 'index']);
-
+Route::get('post/{post}', function ($slug) {
+    return view('post', [
+        'post' => Post::find($slug);
+    ]);
+})->where('post','[A-z_\-]+');
 
 
